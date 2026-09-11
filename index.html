@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TekLid</title><meta name="robots" content="noindex, follow"><link rel="canonical" href="https://teklid.com/en/"><link rel="alternate" hreflang="en" href="https://teklid.com/en/"><link rel="alternate" hreflang="fr" href="https://teklid.com/fr/"><link rel="alternate" hreflang="x-default" href="https://teklid.com/en/"><script>(function(){const defaultPath = "/en/";
+const knownLocales = "[\"en\",\"fr\"]";
+const storageKey = "teklid:lang";
+
+      // Progressive enhancement, in priority order:
+      //   1. a language the visitor explicitly chose with the switcher (remembered),
+      //   2. the browser's preferred languages, first one we publish wins,
+      //   3. the default locale.
+      // Runs before the meta refresh below is parsed, so detection always gets
+      // the first word; the refresh only ever fires with JavaScript disabled.
+      (function () {
+        var supported = JSON.parse(knownLocales);
+        var target = defaultPath;
+        function pathFor(code) {
+          return defaultPath.replace(/[a-z]{2}\/$/, code + '/');
+        }
+        try {
+          var stored = window.localStorage.getItem(storageKey);
+          if (stored && supported.indexOf(stored) !== -1) {
+            window.location.replace(pathFor(stored));
+            return;
+          }
+        } catch (error) {
+          /* storage unavailable — fall through to browser language */
+        }
+        try {
+          var candidates = (navigator.languages && navigator.languages.length
+            ? navigator.languages
+            : [navigator.language]
+          ).filter(Boolean);
+          for (var i = 0; i < candidates.length; i++) {
+            var code = String(candidates[i]).toLowerCase().split('-')[0];
+            if (supported.indexOf(code) !== -1) {
+              target = pathFor(code);
+              break;
+            }
+          }
+        } catch (error) {
+          /* keep the default */
+        }
+        window.location.replace(target);
+      })();
+    })();</script><meta http-equiv="refresh" content="0; url=/en/"></head><body><p>Redirecting to TekLid…</p><ul><li><a href="/en/" hreflang="en">English</a></li><li><a href="/fr/" hreflang="fr">Français</a></li></ul></body></html>

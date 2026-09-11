@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teklid.com/sitemap-index.xml
